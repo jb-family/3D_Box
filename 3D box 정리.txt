@@ -1,0 +1,62 @@
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  perspective: 1000px;
+}
+= .container의 값을 화면 정중앙으로 옮겨준다.
+perspective는 얼마만큼 멀리 떨어져서 보겠다는 것임. 값이 커질수록 멀리서 보는 효과가 있다.(원근법)
+기본적으로 최상위 div태그에다가 입력해야함
+
+.flip-btn {
+  color: white;
+  width: 200px;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  transform-style: preserve-3d;
+}
+= height:와 line-height를 동일한값으로 입력하면 수직 중앙정렬이 된다. 다만 글자가 한줄이상일때는 안된다.
+css에서 3d요소로 변경하려면 transform-style:preserve-3d; 입력하면 3d공간에 배치가 된다. (z축이 생김)
+
+
+.front {
+  width: 200px;
+  height: 100px;
+  background-color: goldenrod;
+  transform: translateZ(50px);
+}
+=front에 transform:translateZ(50px)입력을 하지않았다고 가정하면 현재 back의 위치는 + 형태로 
+  front의 맨상단에 절반이 걸쳐있는 상태가 된다. 그렇기때문에 front도 translateZ(50px)을 입력하여 z축을 50px만큼 앞으로 이동시킨다.
+  그렇게되면 ㄱ 자의 모양이 갖추어지는것이다.
+
+.back {
+  width: 200px;
+  height: 100px;
+  background-color: darkgoldenrod;
+  transform: rotateX(90deg) translateZ(150px);
+}
+= transform:rotateX(90deg)는 X축이 90도로 변경된다(납작하게됨)
+translateZ(150px) 는 3D요소를 Z축 기준으로 이동하게 하는 함수이다.
+translateZ(150px)을 입력하면 .front의 위끝선으로 이동하게 되는데 그렇게되는이유는
+.back의 height은 100px이다. 그걸 90도로 눕히면 50%만 접힌게 되므로 50px을 입력하면 front의 맨하단 끝선으로 이동하게된다.
+즉 front의 height도 100px이므로 150px을 입력하게되면 맨상단끝부분으로 이동하게된다. 
+
+
+.flip-btn:hover {
+  transform: rotateX(-90deg);
+  transition: all 1s;
+}
+입력하게되면
+transform:rotatxX(-90deg); X축기준으로 -90도가 회전하게되는데 
+자연스러운효과를 주려고 하면 transition: all 1s;
+입력했을때 X축의 -90도 회전이 모든 프로퍼티의변화를 1초동안 전환되게 한다.
+
+
+프로퍼티	설명	기본값
+transition-property	트랜지션의 대상이 되는 CSS 프로퍼티를 지정한다	(all)
+transition-duration	트랜지션이 일어나는 지속시간(duration)을 초 단위(s) 또는 밀리 초 단위(ms)로 지정한다  (0s)
+transition-timing-function	트랜지션 효과를 위한 수치 함수를 지정한다.  (ease)
+transition-delay	프로퍼티가 변화한 시점과 트랜지션이 실제로 시작하는 사이에 대기하는 시간을 초 단위(s) 또는 밀리 초 단위(ms)로 지정한다	(0s)
+transition	모든 트랜지션 프로퍼티를 한번에 지정한다 (shorthand syntax)	 
